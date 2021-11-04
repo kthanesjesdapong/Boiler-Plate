@@ -14,7 +14,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <p>hello</p>
+        <p>man u</p>
       </header>
     </div>
   );
