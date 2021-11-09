@@ -2,23 +2,16 @@ const express = require('express');
 require('cross-fetch/polyfill');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const routerHandler = require('./api/route');
+const routeHandler = require('./api/route');
 
 const app = express();
-const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use('/graphql', routeHandler);
 
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`listening on ${PORT}`));
 
-app.post('/api/world', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`
-  );
-});
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
+module.exports = app;
